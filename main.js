@@ -103,7 +103,7 @@ const handleStart = () => {
 }
 
 const updateTimer = () => {
-  const timeOffset = Math.ceil(5 - (Date.now() - startTime) / 1000);
+  const timeOffset = Math.ceil(60 - (Date.now() - startTime) / 1000);
 
   if (timeOffset <= 0) {
     handleEnd();
