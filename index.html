@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1 class="text-6xl text-center mt-[4rem]">Daily Arithmetic</h1>
+    <div class="h-[4rem] flex justify-center flex-col">
+      <button class="block start-btn mx-auto border border-gray-300 rounded-full px-[.5rem] py-[.25rem] hover:bg-gray-300">Start!</button>
+      <p class="timer text-2xl text-center" hidden></p>
+    </div>
+    <div class="inputs flex gap-4 justify-center">
+      <p class="arg1 w-[3rem] h-[3rem] border border-gray-300 rounded-full justify-center items-center flex"></p>
+      <p class="operator text-xl w-[1.5rem] h-[3rem] rounded-full justify-center items-center flex"></p>
+      <p class="arg2 w-[3rem] h-[3rem] border border-gray-300 rounded-full justify-center items-center flex"></p>
+      <p class="text-xl w-[1.5rem] h-[3rem] rounded-full justify-center items-center flex">=</p>
+      <input type="text" class="answer w-[3rem] h-[3rem] border border-gray-300 rounded-full text-center items-center flex" maxlength="3">
+    </div>
+    <p class="play-again text-xl text-center" hidden>Play again tomorrow!</p>
+  </main>
+</body>
+</html>
