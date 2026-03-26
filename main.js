@@ -14,13 +14,14 @@ let startTime = false;
 let score = 0;
 
 if (localStorage.getItem('date') === new Date().toDateString() && localStorage.getItem('score')) {
-  startBtn.toggleAttribute('hidden');
-  inputs.toggleAttribute('hidden');
   timer.toggleAttribute('hidden');
   playAgain.toggleAttribute('hidden');
 
   score = localStorage.getItem('score');
   timer.innerText = `Score: ${score}`;
+} else {
+  startBtn.toggleAttribute('hidden');
+  inputs.toggleAttribute('hidden');
 }
 
 const getOperationIndex = () => {
@@ -56,7 +57,7 @@ const generateQuestion = () => {
       randomNums = [getInt(25), getInt(25)];
       arg1.textContent = randomNums[0];
       arg2.textContent = randomNums[1];
-      operator.textContent = '*';
+      operator.textContent = 'X';
       nextAnswer = randomNums[0] * randomNums[1];
       break;
     case 4:
