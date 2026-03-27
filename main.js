@@ -12,6 +12,7 @@ const myrng = new Math.seedrandom(new Date().toDateString());
 let nextAnswer;
 let startTime = false;
 let score = 0;
+let totalTime = 30;
 
 if (localStorage.getItem('date') === new Date().toDateString() && localStorage.getItem('score')) {
   timer.toggleAttribute('hidden');
@@ -104,7 +105,7 @@ const handleStart = () => {
 }
 
 const updateTimer = () => {
-  const timeOffset = Math.ceil(60 - (Date.now() - startTime) / 1000);
+  const timeOffset = Math.ceil(totalTime - (Date.now() - startTime) / 1000);
 
   if (timeOffset <= 0) {
     handleEnd();
@@ -122,6 +123,7 @@ startBtn.addEventListener('click', handleStart);
 answer.addEventListener('input', (e) => {
   if (parseInt(e.target.value) === nextAnswer) {
     e.target.value = '';
+    totalTime += 200 / totalTime;
 
     generateQuestion();
 
