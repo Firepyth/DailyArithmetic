@@ -14,16 +14,16 @@ let startTime = false;
 let score = 0;
 let totalTime = 30;
 
-if (localStorage.getItem('date') === new Date().toDateString() && localStorage.getItem('score')) {
-  timer.toggleAttribute('hidden');
-  playAgain.toggleAttribute('hidden');
+// if (localStorage.getItem('date') === new Date().toDateString() && localStorage.getItem('score')) {
+//   timer.toggleAttribute('hidden');
+//   playAgain.toggleAttribute('hidden');
 
-  score = localStorage.getItem('score');
-  timer.innerText = `Score: ${score}`;
-} else {
+//   score = localStorage.getItem('score');
+//   timer.innerText = `Score: ${score}`;
+// } else {
   startBtn.toggleAttribute('hidden');
   inputs.toggleAttribute('hidden');
-}
+// }
 
 const getOperationIndex = () => {
   return Math.ceil(myrng() * 4);
