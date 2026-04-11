@@ -11,18 +11,18 @@
 <body class="bg-[#222429] text-[#eaeaea]">
   <main>
     <h1 class="text-6xl text-center mt-[4rem]">Daily Arithmetic</h1>
-    <div class="h-[4rem] flex justify-center flex-col">
-      <button class="block start-btn mx-auto border border-[#eaeaea] rounded-full px-[.5rem] py-[.25rem] hover:bg-[#eaeaea22] cursor-pointer" hidden>Start!</button>
+    <div class="h-[4rem] flex justify-center items-center gap-4">
       <p class="timer text-2xl text-center" hidden></p>
+      <button class="block start-btn-daily border border-[#eaeaea] rounded-full px-[.5rem] py-[.25rem] hover:bg-[#eaeaea22] cursor-pointer" hidden>Daily</button>
+      <button class="block start-btn-random border border-[#eaeaea] rounded-full px-[.5rem] py-[.25rem] hover:bg-[#eaeaea22] cursor-pointer">Random</button>
     </div>
-    <div class="inputs flex gap-4 justify-center" hidden>
+    <div class="inputs flex gap-4 justify-center">
       <p class="arg1 w-[3rem] h-[3rem] border border-[#eaeaea] rounded-full justify-center items-center flex"></p>
       <p class="operator text-xl w-[1.5rem] h-[3rem] rounded-full justify-center items-center flex"></p>
       <p class="arg2 w-[3rem] h-[3rem] border border-[#eaeaea] rounded-full justify-center items-center flex"></p>
       <p class="text-xl w-[1.5rem] h-[3rem] rounded-full justify-center items-center flex">=</p>
       <input type="text" class="answer w-[3rem] h-[3rem] border border-[#eaeaea] rounded-full text-center items-center flex" maxlength="3">
     </div>
-    <p class="play-again text-xl text-center" hidden>Play again tomorrow!</p>
   </main>
 </body>
 </html>

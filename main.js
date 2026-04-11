@@ -1,29 +1,27 @@
 const inputs = document.querySelector('.inputs');
-const startBtn = document.querySelector('.start-btn');
+const startBtnDaily = document.querySelector('.start-btn-daily');
+const startBtnRandom = document.querySelector('.start-btn-random');
 const arg1 = document.querySelector('.arg1');
 const operator = document.querySelector('.operator');
 const arg2 = document.querySelector('.arg2');
 const answer = document.querySelector('.answer');
 const timer = document.querySelector('.timer');
-const playAgain = document.querySelector('.play-again');
 
-const myrng = new Math.seedrandom(new Date().toDateString());
+let myrng;
 
 let nextAnswer;
 let startTime = false;
 let score = 0;
 let totalTime = 30;
+let isDaily = false;
 
-// if (localStorage.getItem('date') === new Date().toDateString() && localStorage.getItem('score')) {
-//   timer.toggleAttribute('hidden');
-//   playAgain.toggleAttribute('hidden');
-
-//   score = localStorage.getItem('score');
-//   timer.innerText = `Score: ${score}`;
-// } else {
-  startBtn.toggleAttribute('hidden');
-  inputs.toggleAttribute('hidden');
-// }
+if (localStorage.getItem('date') === new Date().toDateString() && localStorage.getItem('score')) {
+  score = localStorage.getItem('score');
+  timer.innerText = `Daily Score: ${score}`;
+  timer.removeAttribute('hidden');
+} else {
+  startBtnDaily.toggleAttribute('hidden');
+}
 
 const getOperationIndex = () => {
   return Math.ceil(myrng() * 4);
@@ -82,18 +80,39 @@ const handleEnd = () => {
   arg2.textContent = '';
   operator.textContent = '';
   inputs.toggleAttribute('hidden');
-  playAgain.toggleAttribute('hidden');
 
   timer.innerText = `Score: ${score}`;
-  localStorage.setItem('score', score);
-  localStorage.setItem('date', new Date().toDateString());
+  if (isDaily === true) {
+    localStorage.setItem('score', score);
+    localStorage.setItem('date', new Date().toDateString());
+  }
 }
 
-const handleStart = () => {
+const handleStartDaily = () => {
   if (!startTime) {
-    startBtn.toggleAttribute('hidden');
-    timer.toggleAttribute('hidden');
+    startBtnDaily.setAttribute('hidden', true);
+    startBtnRandom.setAttribute('hidden', true);
+    timer.removeAttribute('hidden');
 
+    isDaily = true;
+    myrng = new Math.seedrandom(new Date().toDateString());
+    generateQuestion();
+
+    startTime = Date.now();
+
+    answer.focus();
+
+    requestAnimationFrame(updateTimer);
+  }
+}
+
+const handleStartRandom = () => {
+  if (!startTime) {
+    startBtnDaily.setAttribute('hidden', true);
+    startBtnRandom.setAttribute('hidden', true);
+    timer.removeAttribute('hidden');
+
+    myrng = new Math.seedrandom();
     generateQuestion();
 
     startTime = Date.now();
@@ -118,7 +137,8 @@ const updateTimer = () => {
   requestAnimationFrame(updateTimer);
 }
 
-startBtn.addEventListener('click', handleStart);
+startBtnDaily.addEventListener('click', handleStartDaily);
+startBtnRandom.addEventListener('click', handleStartRandom);
 
 answer.addEventListener('input', (e) => {
   if (parseInt(e.target.value) === nextAnswer) {
