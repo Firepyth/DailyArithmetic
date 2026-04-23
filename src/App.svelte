@@ -3,7 +3,7 @@
   import Game from "./lib/Game.svelte";
   import { writable, type Writable } from "svelte/store";
 
-  const currentDay = Math.floor(Date.now() / (1000 * 60 * 60 * 24) - new Date().getTimezoneOffset() * 60 * 1000);
+  const currentDay = Math.floor(Date.now() / (1000 * 60 * 60 * 24) - new Date().getTimezoneOffset() / 60 / 24);
   let copyScoreMessage = "Copy Daily Score";
 
   setContext('hasStarted', writable(false));
