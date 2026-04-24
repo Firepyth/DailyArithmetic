@@ -40,7 +40,7 @@ https://firepyth.github.io/DailyArithmetic/`);
 <section id="center">
   <div>
     <h1>Daily Arithmetic</h1>
-    <p>Perform basic math operation as quickly as you can!</p>
+    <p>Perform basic math operations as quickly as you can!</p>
     <p>Every problem you solve gives you a little more time, but with diminishing returns.</p>
   </div>
   {#if $hasStarted === false}
