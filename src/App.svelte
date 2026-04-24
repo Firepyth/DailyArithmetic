@@ -2,13 +2,20 @@
   import { getContext, setContext } from "svelte";
   import Game from "./lib/Game.svelte";
   import { writable, type Writable } from "svelte/store";
+  import Button from "./lib/components/Button.svelte";
+  import Code from "./lib/components/Code.svelte";
+  import Check from "./lib/components/Check.svelte";
 
+  
   const currentDay = Math.floor(Date.now() / (1000 * 60 * 60 * 24) - new Date().getTimezoneOffset() / 60 / 24);
   let copyScoreMessage = "Copy Daily Score";
-
+  
   setContext('hasStarted', writable(false));
   let hasStarted: Writable<boolean> = getContext('hasStarted');
-  
+    
+  setContext('isOnHard', writable(localStorage.getItem('isOnHard') === "true"));
+  let isOnHard: Writable<boolean> = getContext('isOnHard');
+
   setContext('score', writable(0));
   let score: Writable<number> = getContext('score');
   
@@ -37,35 +44,45 @@ https://firepyth.github.io/DailyArithmetic/`);
   }
 </script>
 
-<section id="center">
+<section class="flex flex-col gap-[1.5625rem] place-content-center place-items-center flex-1">
+  {#if $hasStarted === false}
   <div>
-    <h1>Daily Arithmetic</h1>
+    <h1 class="font-sans font-[500] text-text-h text-[2.25rem] my-[1.25rem]">Daily Arithmetic</h1>
     <p>Perform basic math operations as quickly as you can!</p>
     <p>Every problem you solve gives you a little more time, but with diminishing returns.</p>
+    <p class="text-accent">Turn on hard mode for an extra challenge! Each incorrect number costs one second.</p>
   </div>
-  {#if $hasStarted === false}
-  <h2 class="flex gap-4">
-    {#if currentDay === $lastDaily}
-      <code>
-        Daily Score: {$dailyScore}
-      </code>
-    {/if}
-    <code>
+  <p class="flex gap-4">
+    <Code>
+      Daily Score: {currentDay === $lastDaily ? $dailyScore : "N/A"}
+    </Code>
+    <Code>
       Most Recent Score: {$score}
-    </code>
-  </h2>
+    </Code>
+  </p>
   <div class="flex gap-4">
-    <button class="counter" tabindex="0" on:click={() => handleStart()}>
-      Random
-    </button>
-    <button class="counter" disabled={currentDay === $lastDaily} tabindex="0" on:click={() => handleStart(true)}>
+    <Button
+      onClick={() => handleStart()}
+    >
+      Random  
+    </Button>
+    <Button
+      onClick={() => handleStart(true)}
+      disabled={currentDay === $lastDaily}
+    >
       Daily
-    </button>
+    </Button>
+    <label for="hard-mode" class="flex items-center gap-2 text-accent font-mono pl-4">
+      <Check {isOnHard}/>
+      Hard Mode
+    </label>
   </div>
   {#if currentDay === $lastDaily}
-    <button class="counter" on:click={handleCopyToClipboard}>
-      {copyScoreMessage}
-    </button>
+    <Button
+      onClick={handleCopyToClipboard}
+    >
+      {copyScoreMessage}  
+    </Button>
   {/if}
   {:else}
     <Game seeded={$isDaily} currentDay={currentDay} />
