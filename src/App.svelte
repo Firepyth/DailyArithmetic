@@ -58,7 +58,7 @@ https://firepyth.github.io/DailyArithmetic/`);
     <button class="counter" tabindex="0" on:click={() => handleStart()}>
       Random
     </button>
-    <button class="counter" disabled={$dailyScore !== -1} tabindex="0" on:click={() => handleStart(true)}>
+    <button class="counter" disabled={currentDay === $lastDaily} tabindex="0" on:click={() => handleStart(true)}>
       Daily
     </button>
   </div>
